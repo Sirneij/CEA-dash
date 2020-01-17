@@ -1,0 +1,58 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+<div class="panel-header">
+</div>
+<div class="content">
+  <div class="row">
+    <!--Escalation Count by Month/Quarter Number chart-->
+    <div class="col-md-12">
+      <div class="card  card-tasks">
+        <div class="card-header ">
+          <h5 class="card-category">Escalation Count by Month/Quarter Statistics</h5>
+          <h4 class="card-title">Escalation Count by Month/Quarter</h4>
+        </div>
+        <hr>
+        <div class="card-body ">
+          <div class="text-center">
+            <h2>{{ totalCalls }}</h2>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh"></i> Updated Real time
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!--Escalation Count by Month bar chart-->
+    <div class="col-md-12">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h5 class="card-category">Escalation Count Statistics</h5>
+          <h4 class="card-title">Escalation Count by Month</h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area" style="width: auto; height: auto;">
+            <canvas id="escalationCountByMonthChart"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <hr>
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh"></i> Updated daily
+            <button class="btn btn-primary" id="randomizeData">Randomize Data</button>
+            <button class="btn btn-primary" id="addDataset">Add Dataset</button>
+            <button class="btn btn-primary" id="removeDataset">Remove Dataset</button>
+            <button class="btn btn-primary" id="addData">Add Data</button>
+            <button class="btn btn-primary" id="removeData">Remove Data</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

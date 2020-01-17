@@ -1,0 +1,31 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+      <div class="panel-header panel-header-lg">
+        <canvas id="averageResponseTimeChart"></canvas>
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <!--Followership count trend line chart-->
+      <div class="card card-chart">
+        <div class="card-header">
+          <h5 class="card-category">Followership count trend Statistics</h5>
+          <h4 class="card-title">Followership count trend</h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="followershipCountTrendChart"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <hr>
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh"></i> Updated last week
+          </div>
+        </div>
+      </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock content %}

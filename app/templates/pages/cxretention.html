@@ -1,0 +1,286 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+<!-- End Navbar -->
+<div class="panel-header panel-header-sm">
+  
+</div>
+
+
+<div class="content">
+ <div class="row">
+          <!--VOTC Report table-->
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">VOTC Report</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th>
+                        Name
+                      </th>
+                      <th>
+                        Country
+                      </th>
+                      <th>
+                        City
+                      </th>
+                      <th class="text-right">
+                        Salary
+                      </th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          Dakota Rice
+                        </td>
+                        <td>
+                          Niger
+                        </td>
+                        <td>
+                          Oud-Turnhout
+                        </td>
+                        <td class="text-right">
+                          $36,738
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Minerva Hooper
+                        </td>
+                        <td>
+                          Curaçao
+                        </td>
+                        <td>
+                          Sinaai-Waas
+                        </td>
+                        <td class="text-right">
+                          $23,789
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Sage Rodriguez
+                        </td>
+                        <td>
+                          Netherlands
+                        </td>
+                        <td>
+                          Baileux
+                        </td>
+                        <td class="text-right">
+                          $56,142
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Philip Chaney
+                        </td>
+                        <td>
+                          Korea, South
+                        </td>
+                        <td>
+                          Overland Park
+                        </td>
+                        <td class="text-right">
+                          $38,735
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Doris Greene
+                        </td>
+                        <td>
+                          Malawi
+                        </td>
+                        <td>
+                          Feldkirchen in Kärnten
+                        </td>
+                        <td class="text-right">
+                          $63,542
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Mason Porter
+                        </td>
+                        <td>
+                          Chile
+                        </td>
+                        <td>
+                          Gloucester
+                        </td>
+                        <td class="text-right">
+                          $78,615
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Jon Porter
+                        </td>
+                        <td>
+                          Portugal
+                        </td>
+                        <td>
+                          Gloucester
+                        </td>
+                        <td class="text-right">
+                          $98,615
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+<!--Survey Report NPS line chart-->
+    <div class="col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h5 class="card-category">Survey Report NPS Statistics</h5>
+          <h4 class="card-title">Survey Report NPS</h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="chart" width="600" height="400"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <hr>
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh"></i> Updated Real time
+          </div>
+        </div>
+      </div>
+    </div>
+
+        </div>
+  <div class="row">
+    <!--Reimbursement Trend by Period line graph-->
+    <div class="col-lg-4">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h5 class="card-category">Reimbursement Trend Statistics</h5>
+          <h4 class="card-title">Reimbursement Trend by Period</h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="lineChartExample"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!--Reimbursement Trend by Location line graph-->    
+    <div class="col-lg-4 col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h5 class="card-category">Reimbursement Trend by Location statistics</h5>
+          <h4 class="card-title">Reimbursement Trend by Location</h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="lineChartExampleWithNumbersAndGrid"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--CX Dash board bar chart-->
+    <div class="col-lg-4 col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">CX Dash board  Statistics</h5>
+          <h4 class="card-title">CX Dash board </h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="barChartSimpleGradientsNumbers"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <!--Touch points ratings bar chart-->
+    <div class="col-lg-4">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h5 class="card-category">Touch points ratings Statistics</h5>
+          <h4 class="card-title">Touch points ratings</h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="lineChartExample"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Cssp Sign Up bar chart-->
+    <div class="col-lg-4 col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h5 class="card-category">Cssp Sign Up statistics</h5>
+          <h4 class="card-title">Cssp Sign Up</h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="lineChartExampleWithNumbersAndGrid"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Ipnx Activation Dashboard bar chart-->
+    <div class="col-lg-4 col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h5 class="card-category">Ipnx Activation Dashboard Statistics</h5>
+          <h4 class="card-title">Ipnx Activation Dashboard</h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="barChartSimpleGradientsNumbers"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

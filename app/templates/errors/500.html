@@ -1,0 +1,13 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+<div class="panel-header">
+	{% for message in get_flashed_messages() %}
+        <div class="header text-center">
+            <h2 class="title">Error Notification</h2>
+            <p class="text-primary error"><i>
+                Internal error. Seek technical support for this...
+            </i></p>      
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}

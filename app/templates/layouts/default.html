@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='assets/img/favicon-9940dcf9a846f2d938765451828df01b06ea8dd1fc2693983c1093d49d8f91da.ico') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/img/favicon-9940dcf9a846f2d938765451828df01b06ea8dd1fc2693983c1093d49d8f91da.ico') }}">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  {% if title %}
+  <title>ipNX dashboard - {{ title }}</title>
+  {% else %}
+  <title>ipNX dashboard</title>
+  {% endif %}
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+    name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <!-- CSS Files -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/now-ui-dashboard.css') }}">
+  <style>
+        .dashlogo{
+          background: #FFFFFF;
+            width: auto;
+            height: 100%!important;
+        }
+        @media screen and (max-width: 960px){
+            .dashlogo{
+                width: 50%;
+            }
+        }
+        /* Fill from right */
+        .button-fill-right {
+            box-shadow: inset 0px 0px 0px #2F3B47;
+            transition: all 0.5s !important;
+        }
+
+        .button-fill-right:hover {
+            box-shadow: inset -150px 0px 0px #2F3B47;
+        }
+        .error{
+          font-size: 1.5em;
+        }
+        .register{
+          position: relative; 
+          left: 13em;
+        }
+        @media screen and (max-width: 1087px){
+          .register{
+            left: 4em;
+          }
+        }
+        @media screen and (max-width: 980px){
+          .register{
+            left: 0em;
+          }
+        }
+       
+        .custom-file-label.rounded-pill {
+          border-radius: 50rem;
+        }
+
+        .custom-file-label.rounded-pill::after {
+          border-radius: 0 50rem 50rem 0;
+        }
+
+    </style>
+</head>
+
+<body class="">
+  <div class="wrapper ">
+
+    {% include 'includes/sidebar.html' %}
+
+    <div class="main-panel" id="main-panel">
+
+      {% include 'includes/navigation.html' %}
+
+      {% block content %}{% endblock %}
+
+      {% include 'includes/footer.html' %}
+
+    </div>
+  </div>
+
+  {% include 'includes/scripts.html' %}
+
+</body>
+
+</html>

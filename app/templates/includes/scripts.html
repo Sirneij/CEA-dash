@@ -1,0 +1,795 @@
+<!--   Core JS Files   -->
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/core/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/core/popper.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/core/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/plugins/chartjs.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/custom/utils.js') }}"></script>
+<!--  Notifications Plugin    -->
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/plugins/bootstrap-notify.js') }}"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/now-ui-dashboard.min.js') }}"></script>
+<!--My charts scripts-->
+<script type="text/javascript" src="{{ url_for('static', filename='assets/custom/retailcharts.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/custom/cxretensioncharts.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/custom/emailescalationcharts.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/custom/indexcharts.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/custom/socialcharts.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/custom/ticketingresolutioncharts.js') }}"></script>
+<script type="text/javascript">
+$(function () {
+    setNavigation();
+});
+
+function setNavigation() {
+    var path = window.location.pathname;
+    path = path.replace(/\/$/, "");
+    path = decodeURIComponent(path);
+
+    $(".nav a").each(function () {
+        var href = $(this).attr('href');
+        if (path.substring(0, href.length) === href) {
+            $(this).closest('li').addClass('active');
+        }
+    });
+}
+    
+    //Social Average response time
+  $(document).ready(function () {
+    chartColor = "#FFFFFF";
+    var ctx = document.getElementById('averageResponseTimeChart').getContext("2d");
+
+    var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
+    gradientStroke.addColorStop(0, '#80b6f4');
+    gradientStroke.addColorStop(1, chartColor);
+
+    var gradientFill = ctx.createLinearGradient(0, 200, 0, 50);
+    gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+    gradientFill.addColorStop(1, "rgba(255, 255, 255, 0.24)");
+    const config = {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{
+          label: "Data",
+          borderColor: chartColor,
+          pointBorderColor: chartColor,
+          pointBackgroundColor: "#1e3d60",
+          pointHoverBackgroundColor: "#1e3d60",
+          pointHoverBorderColor: chartColor,
+          pointBorderWidth: 1,
+          pointHoverRadius: 7,
+          pointHoverBorderWidth: 2,
+          pointRadius: 5,
+          fill: true,
+          backgroundColor: gradientFill,
+          borderWidth: 2,
+          data: []
+        }]
+      },
+      options: {
+        layout: {
+          padding: {
+            left: 20,
+            right: 20,
+            top: 0,
+            bottom: 0
+          }
+        },
+        maintainAspectRatio: false,
+        tooltips: {
+          backgroundColor: '#fff',
+          titleFontColor: '#333',
+          bodyFontColor: '#666',
+          bodySpacing: 4,
+          xPadding: 12,
+          mode: "nearest",
+          intersect: 0,
+          position: "nearest"
+        },
+        legend: {
+          position: "bottom",
+          fillStyle: "#FFF",
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              fontColor: "rgba(255,255,255,0.4)",
+              fontStyle: "bold",
+              beginAtZero: true,
+              maxTicksLimit: 5,
+              padding: 10
+            },
+            gridLines: {
+              drawTicks: true,
+              drawBorder: false,
+              display: true,
+              color: "rgba(255,255,255,0.1)",
+              zeroLineColor: "transparent"
+            }
+
+          }],
+          xAxes: [{
+            gridLines: {
+              zeroLineColor: "transparent",
+              display: false,
+
+            },
+            ticks: {
+              padding: 10,
+              fontColor: "rgba(255,255,255,0.4)",
+              fontStyle: "bold"
+            }
+          }]
+        }
+      }
+    }
+    const lineChart = new Chart(ctx, config);
+
+        const source = new EventSource("/chart-data");
+
+        source.onmessage = function (event) {
+            const data = JSON.parse(event.data);
+            if (config.data.labels.length === 20) {
+                config.data.labels.shift();
+                config.data.datasets[0].data.shift();
+            }
+            config.data.labels.push(data.time);
+            config.data.datasets[0].data.push(data.value);
+            lineChart.update();
+        }
+    });
+
+//Social Average Followership count trend
+    $(document).ready(function () {
+    chartColor = "#FFFFFF";
+    var ctx = document.getElementById('followershipCountTrendChart').getContext("2d");
+
+    gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
+    gradientStroke.addColorStop(0, '#80b6f4');
+    gradientStroke.addColorStop(1, chartColor);
+
+    gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
+    gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+    gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
+    const config = {
+      type: 'bar',
+      responsive: true,
+      data: {
+        labels: [],
+        datasets: [{
+          label: "Active Users",
+          borderColor: "#f96332",
+          pointBorderColor: "#FFF",
+          pointBackgroundColor: "#f96332",
+          pointBorderWidth: 2,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 1,
+          pointRadius: 4,
+          fill: true,
+          backgroundColor: gradientFill,
+          borderWidth: 2,
+          data: []
+        }]
+      },
+      options: {
+      maintainAspectRatio: false,
+      legend: {
+        display: true
+      },
+      tooltips: {
+        bodySpacing: 4,
+        mode: "nearest",
+        intersect: 0,
+        position: "nearest",
+        xPadding: 10,
+        yPadding: 10,
+        caretPadding: 10
+      },
+      responsive: true,
+      scales: {
+        yAxes: [{
+          display: 0,
+          gridLines: 0,
+          ticks: {
+            display: false
+          },
+          gridLines: {
+            zeroLineColor: "transparent",
+            drawTicks: false,
+            display: false,
+            drawBorder: false
+          }
+        }],
+        xAxes: [{
+          display: 0,
+          gridLines: 0,
+          ticks: {
+            display: false
+          },
+          gridLines: {
+            zeroLineColor: "transparent",
+            drawTicks: false,
+            display: false,
+            drawBorder: false
+          }
+        }]
+      },
+      layout: {
+        padding: {
+          left: 0,
+          right: 0,
+          top: 15,
+          bottom: 15
+        }
+      }
+    }
+    }
+    const lineChart = new Chart(ctx, config);
+
+        const source = new EventSource("/chart-data");
+
+        source.onmessage = function (event) {
+            const data = JSON.parse(event.data);
+            if (config.data.labels.length === 20) {
+                config.data.labels.shift();
+                config.data.datasets[0].data.shift();
+            }
+            config.data.labels.push(data.time);
+            config.data.datasets[0].data.push(data.value);
+            lineChart.update();
+        }
+
+    });
+    
+      var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var color = Chart.helpers.color;
+    var barChartData = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [{
+        label: 'Dataset 1',
+        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+        borderColor: window.chartColors.red,
+        borderWidth: 1,
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor()
+        ]
+      }, {
+        label: 'Dataset 2',
+        backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+        borderColor: window.chartColors.blue,
+        borderWidth: 1,
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor()
+        ]
+      }]
+
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('escalationCountByMonthChart').getContext('2d');
+      window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+          responsive: true,
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Chart.js Bar Chart'
+          }
+        }
+      });
+
+    };
+
+    document.getElementById('randomizeData').addEventListener('click', function() {
+      var zero = Math.random() < 0.2 ? true : false;
+      barChartData.datasets.forEach(function(dataset) {
+        dataset.data = dataset.data.map(function() {
+          return zero ? 0.0 : randomScalingFactor();
+        });
+
+      });
+      window.myBar.update();
+    });
+
+    var colorNames = Object.keys(window.chartColors);
+    document.getElementById('addDataset').addEventListener('click', function() {
+      var colorName = colorNames[barChartData.datasets.length % colorNames.length];
+      var dsColor = window.chartColors[colorName];
+      var newDataset = {
+        label: 'Dataset ' + (barChartData.datasets.length + 1),
+        backgroundColor: color(dsColor).alpha(0.5).rgbString(),
+        borderColor: dsColor,
+        borderWidth: 1,
+        data: []
+      };
+
+      for (var index = 0; index < barChartData.labels.length; ++index) {
+        newDataset.data.push(randomScalingFactor());
+      }
+
+      barChartData.datasets.push(newDataset);
+      window.myBar.update();
+    });
+
+    document.getElementById('addData').addEventListener('click', function() {
+      if (barChartData.datasets.length > 0) {
+        var month = MONTHS[barChartData.labels.length % MONTHS.length];
+        barChartData.labels.push(month);
+
+        for (var index = 0; index < barChartData.datasets.length; ++index) {
+          // window.myBar.addData(randomScalingFactor(), index);
+          barChartData.datasets[index].data.push(randomScalingFactor());
+        }
+
+        window.myBar.update();
+      }
+    });
+
+    document.getElementById('removeDataset').addEventListener('click', function() {
+      barChartData.datasets.pop();
+      window.myBar.update();
+    });
+
+    document.getElementById('removeData').addEventListener('click', function() {
+      barChartData.labels.splice(-1, 1); // remove the label first
+
+      barChartData.datasets.forEach(function(dataset) {
+        dataset.data.pop();
+      });
+
+      window.myBar.update();
+    });
+
+    //Ticketing and Resolution  Average Ticket Handle Time By Queue and Period
+var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var color = Chart.helpers.color;
+    var barChartData = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [{
+        label: 'Dataset 1',
+        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+        borderColor: window.chartColors.red,
+        borderWidth: 1,
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor()
+        ]
+      }, {
+        label: 'Dataset 2',
+        backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+        borderColor: window.chartColors.blue,
+        borderWidth: 1,
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor()
+        ]
+      }]
+
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('averageTicketHandleChart').getContext('2d');
+      window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+          responsive: true,
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Chart.js Bar Chart'
+          }
+        }
+      });
+
+    };
+
+    document.getElementById('randomizeData').addEventListener('click', function() {
+      var zero = Math.random() < 0.2 ? true : false;
+      barChartData.datasets.forEach(function(dataset) {
+        dataset.data = dataset.data.map(function() {
+          return zero ? 0.0 : randomScalingFactor();
+        });
+
+      });
+      window.myBar.update();
+    });
+
+    var colorNames = Object.keys(window.chartColors);
+    document.getElementById('addDataset').addEventListener('click', function() {
+      var colorName = colorNames[barChartData.datasets.length % colorNames.length];
+      var dsColor = window.chartColors[colorName];
+      var newDataset = {
+        label: 'Dataset ' + (barChartData.datasets.length + 1),
+        backgroundColor: color(dsColor).alpha(0.5).rgbString(),
+        borderColor: dsColor,
+        borderWidth: 1,
+        data: []
+      };
+
+      for (var index = 0; index < barChartData.labels.length; ++index) {
+        newDataset.data.push(randomScalingFactor());
+      }
+
+      barChartData.datasets.push(newDataset);
+      window.myBar.update();
+    });
+
+    document.getElementById('addData').addEventListener('click', function() {
+      if (barChartData.datasets.length > 0) {
+        var month = MONTHS[barChartData.labels.length % MONTHS.length];
+        barChartData.labels.push(month);
+
+        for (var index = 0; index < barChartData.datasets.length; ++index) {
+          // window.myBar.addData(randomScalingFactor(), index);
+          barChartData.datasets[index].data.push(randomScalingFactor());
+        }
+
+        window.myBar.update();
+      }
+    });
+
+    document.getElementById('removeDataset').addEventListener('click', function() {
+      barChartData.datasets.pop();
+      window.myBar.update();
+    });
+
+    document.getElementById('removeData').addEventListener('click', function() {
+      barChartData.labels.splice(-1, 1); // remove the label first
+
+      barChartData.datasets.forEach(function(dataset) {
+        dataset.data.pop();
+      });
+
+      window.myBar.update();
+    });
+
+
+
+  
+//Ticketing and Resolution SLA Violation Rate by Queue and Period
+var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var color = Chart.helpers.color;
+    var barChartData = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [{
+        label: 'Dataset 1',
+        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+        borderColor: window.chartColors.red,
+        borderWidth: 1,
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor()
+        ]
+      }, {
+        label: 'Dataset 2',
+        backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+        borderColor: window.chartColors.blue,
+        borderWidth: 1,
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor()
+        ]
+      }]
+
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('slaViolationRatehart').getContext('2d');
+      window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+          responsive: true,
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Chart.js Bar Chart'
+          }
+        }
+      });
+
+    };
+
+    document.getElementById('randomizeData').addEventListener('click', function() {
+      var zero = Math.random() < 0.2 ? true : false;
+      barChartData.datasets.forEach(function(dataset) {
+        dataset.data = dataset.data.map(function() {
+          return zero ? 0.0 : randomScalingFactor();
+        });
+
+      });
+      window.myBar.update();
+    });
+
+    var colorNames = Object.keys(window.chartColors);
+    document.getElementById('addDataset').addEventListener('click', function() {
+      var colorName = colorNames[barChartData.datasets.length % colorNames.length];
+      var dsColor = window.chartColors[colorName];
+      var newDataset = {
+        label: 'Dataset ' + (barChartData.datasets.length + 1),
+        backgroundColor: color(dsColor).alpha(0.5).rgbString(),
+        borderColor: dsColor,
+        borderWidth: 1,
+        data: []
+      };
+
+      for (var index = 0; index < barChartData.labels.length; ++index) {
+        newDataset.data.push(randomScalingFactor());
+      }
+
+      barChartData.datasets.push(newDataset);
+      window.myBar.update();
+    });
+
+    document.getElementById('addData').addEventListener('click', function() {
+      if (barChartData.datasets.length > 0) {
+        var month = MONTHS[barChartData.labels.length % MONTHS.length];
+        barChartData.labels.push(month);
+
+        for (var index = 0; index < barChartData.datasets.length; ++index) {
+          // window.myBar.addData(randomScalingFactor(), index);
+          barChartData.datasets[index].data.push(randomScalingFactor());
+        }
+
+        window.myBar.update();
+      }
+    });
+
+    document.getElementById('removeDataset').addEventListener('click', function() {
+      barChartData.datasets.pop();
+      window.myBar.update();
+    });
+
+    document.getElementById('removeData').addEventListener('click', function() {
+      barChartData.labels.splice(-1, 1); // remove the label first
+
+      barChartData.datasets.forEach(function(dataset) {
+        dataset.data.pop();
+      });
+
+      window.myBar.update();
+    });
+
+
+
+
+//Ticketing and Resolution First Call Resolution Rate
+var randomScalingFactor = function() {
+      return Math.round(Math.random() * 100);
+    };
+
+    var config = {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: [
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+            randomScalingFactor(),
+          ],
+          backgroundColor: [
+            window.chartColors.red,
+            window.chartColors.orange,
+            window.chartColors.yellow,
+            window.chartColors.green,
+            window.chartColors.blue,
+          ],
+          label: 'Dataset 1'
+        }],
+        labels: [
+          'Red',
+          'Orange',
+          'Yellow',
+          'Green',
+          'Blue'
+        ]
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('firstCallResolutionRateChart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+    document.getElementById('randomizeData').addEventListener('click', function() {
+      config.data.datasets.forEach(function(dataset) {
+        dataset.data = dataset.data.map(function() {
+          return randomScalingFactor();
+        });
+      });
+
+      window.myPie.update();
+    });
+
+    var colorNames = Object.keys(window.chartColors);
+    document.getElementById('addDataset').addEventListener('click', function() {
+      var newDataset = {
+        backgroundColor: [],
+        data: [],
+        label: 'New dataset ' + config.data.datasets.length,
+      };
+
+      for (var index = 0; index < config.data.labels.length; ++index) {
+        newDataset.data.push(randomScalingFactor());
+
+        var colorName = colorNames[index % colorNames.length];
+        var newColor = window.chartColors[colorName];
+        newDataset.backgroundColor.push(newColor);
+      }
+
+      config.data.datasets.push(newDataset);
+      window.myPie.update();
+    });
+
+    document.getElementById('removeDataset').addEventListener('click', function() {
+      config.data.datasets.splice(0, 1);
+      window.myPie.update();
+    });
+
+//Ticketing and Resolution Top 5 Complaint Drivers
+var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var color = Chart.helpers.color;
+    var barChartData = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [{
+        label: 'Dataset 1',
+        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+        borderColor: window.chartColors.red,
+        borderWidth: 1,
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor()
+        ]
+      }, {
+        label: 'Dataset 2',
+        backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+        borderColor: window.chartColors.blue,
+        borderWidth: 1,
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor()
+        ]
+      }]
+
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('top5ComplaintDriversChart').getContext('2d');
+      window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+          responsive: true,
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Chart.js Bar Chart'
+          }
+        }
+      });
+
+    };
+
+    document.getElementById('randomizeData').addEventListener('click', function() {
+      var zero = Math.random() < 0.2 ? true : false;
+      barChartData.datasets.forEach(function(dataset) {
+        dataset.data = dataset.data.map(function() {
+          return zero ? 0.0 : randomScalingFactor();
+        });
+
+      });
+      window.myBar.update();
+    });
+
+    var colorNames = Object.keys(window.chartColors);
+    document.getElementById('addDataset').addEventListener('click', function() {
+      var colorName = colorNames[barChartData.datasets.length % colorNames.length];
+      var dsColor = window.chartColors[colorName];
+      var newDataset = {
+        label: 'Dataset ' + (barChartData.datasets.length + 1),
+        backgroundColor: color(dsColor).alpha(0.5).rgbString(),
+        borderColor: dsColor,
+        borderWidth: 1,
+        data: []
+      };
+
+      for (var index = 0; index < barChartData.labels.length; ++index) {
+        newDataset.data.push(randomScalingFactor());
+      }
+
+      barChartData.datasets.push(newDataset);
+      window.myBar.update();
+    });
+
+    document.getElementById('addData').addEventListener('click', function() {
+      if (barChartData.datasets.length > 0) {
+        var month = MONTHS[barChartData.labels.length % MONTHS.length];
+        barChartData.labels.push(month);
+
+        for (var index = 0; index < barChartData.datasets.length; ++index) {
+          // window.myBar.addData(randomScalingFactor(), index);
+          barChartData.datasets[index].data.push(randomScalingFactor());
+        }
+
+        window.myBar.update();
+      }
+    });
+
+    document.getElementById('removeDataset').addEventListener('click', function() {
+      barChartData.datasets.pop();
+      window.myBar.update();
+    });
+
+    document.getElementById('removeData').addEventListener('click', function() {
+      barChartData.labels.splice(-1, 1); // remove the label first
+
+      barChartData.datasets.forEach(function(dataset) {
+        dataset.data.pop();
+      });
+
+      window.myBar.update();
+    });
+</script>

@@ -1,0 +1,138 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+<div class="panel-header">
+    <div class="header text-center">
+        <h2 class="title">Update Profile</h2>
+        {% for message in get_flashed_messages() %}
+        <p class="text-primary error"><i>{{ message }}</i></p>
+        {% endfor %}
+    </div>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        <div class="row">
+                            <div class="col-md-12 pr-2">
+                                <div class="form-group">
+                                    <label style="font-size: 1.2em; font-weight: bold;">Company Name:</label>
+                                    <input type="text" class="form-control" disabled="" placeholder="Company" value="ipNX Nigeria Limited">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pr-2">
+                                <div class="form-group">
+                                    <label style="font-size: 1.2em; font-weight: bold;">E-mail Address:</label>
+                                    {{ form.email(class="form-control", disabled="") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pr-2">
+                                <div class="form-group">
+                                    <label style="font-size: 1.2em; font-weight: bold;">Username:</label>
+                                    {{ form.username(class="form-control", disabled="") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pr-2">
+                                <div class="form-group">
+                                    <label style="font-size: 1.2em; font-weight: bold;">First Name:</label>
+                                    {{ form.firstName(class="form-control", disabled="") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pr-2">
+                                <div class="form-group">
+                                    <label style="font-size: 1.2em; font-weight: bold;">Last Name:</label>
+                                    {{ form.lastName(class="form-control", disabled="") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pr-2">
+                                <div class="form-group">
+                                    <label style="font-size: 1.2em; font-weight: bold;">Current Password:</label>
+                                    {{ form.password(class="form-control") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pr-2">
+                                <div class="form-group">
+                                    <label style="font-size: 1.2em; font-weight: bold;">New Password:</label>
+                                    <input type="password" class="form-control" placeholder="Company" value="Idogun">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pr-2">
+                                <div class="form-group">
+                                    <label style="font-size: 1.2em; font-weight: bold;">About Me</label>
+                                    {{ form.about(rows="4",cols="80", class="form-control")}}
+                            </div>
+                        </div>
+                      </div>
+                        <div class="row">
+                            <div class="col-md-12 pr-2">
+                                <div class="form-group">
+                                    <div class="custom-file overflow-hidden rounded-pill">
+                                      {{ form.picture.label(class="custom-file-label rounded-pill")}}
+                                    {{ form.picture(id="customFile", class="custom-file-input rounded-pill")}}
+                                    
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pr-2">
+                                <div class="form-group">
+                                    {{ form.submit(class="btn btn-round btn-center") }}
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-user">
+                <div class="image">
+                </div>
+                <div class="card-body">
+                    <div class="author">
+                        <a href="#">
+                            <img class="avatar border-gray" src="{{ image_file }}" alt="Profile picture">
+                            <h5 class="title">{{ current_user.lastName }}&nbsp;&nbsp;{{ current_user.firstName }}</h5>
+                        </a>
+                        <p class="description">
+                            {{ current_user.username }}
+                        </p>
+                    </div>
+                    <p class="description text-center">
+                        {{ current_user.about }}
+                    </p>
+                </div>
+                <hr>
+                <div class="button-container">
+                    <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+                    <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                        <i class="fab fa-twitter"></i>
+                    </button>
+                    <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                        <i class="fab fa-google-plus-g"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

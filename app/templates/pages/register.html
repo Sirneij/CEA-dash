@@ -1,0 +1,129 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+<div class="panel-header">
+    <div class="header text-center">
+        <h2 class="title">Register</h2>
+        {% if msg %}
+        <label class="text-primary">{{ msg | safe }}</label>
+        {% else %}
+        <label class="text-primary">Please add your registration information</label>
+        {% endif %}
+    </div>
+</div>
+<div class="content register">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                    <form role="form" method="post" action="" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        <div class="row">
+                            <div class="col-md-1 pr-1"></div>
+                            <div class="col-md-3 pr-1">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    {{ form.firstName(placeholder="First Name",class="form-control") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1 pr-1"></div>
+                            <div class="col-md-3 pr-1">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    {{ form.lastName(placeholder="Last Name",class="form-control") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1 pr-1"></div>
+                            <div class="col-md-3 pr-1">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    {{ form.username(placeholder="Username",class="form-control") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1 pr-1"></div>
+                            <div class="col-md-3 pr-1">
+                                <div class="form-group">
+                                    <label>E-Mail</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    {{ form.email(placeholder="Email",class="form-control") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1 pr-1"></div>
+                            <div class="col-md-3 pr-1">
+                                <div class="form-group">
+                                    <label>Password</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    {{ form.password(placeholder="Password",class="form-control",type="password") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1 pr-1"></div>
+                            <div class="col-md-3 pr-1">
+                                <div class="form-group">
+                                    <label>About</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    {{ form.about(placeholder="Portfolio",class="form-control") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1 pr-1"></div>
+                            <div class="col-md-3 pr-1">
+                                <div class="form-group">
+                                    <label>Profile</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pr-1">
+                                <div class="custom-file overflow-hidden rounded-pill">
+                                    {{ form.picture(id="customFile", class="custom-file-input rounded-pill")}}
+                                    <label for="customFile" class="custom-file-label rounded-pill">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1 pr-1"></div>
+                            <div class="col-md-2 pr-1">
+                                <button type="submit" class="btn btn-fill btn-danger">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card-footer">
+                Have already an account? Please <a href="{{ url_for('users.login') }}">login</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

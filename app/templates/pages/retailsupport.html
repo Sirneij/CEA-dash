@@ -1,0 +1,114 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+      <div class="panel-header panel-header-sm">
+      </div>
+      <div class="content">
+        <div class="row">
+          <!--Total calls Number chart-->
+          <div class="col-md-6">
+      <div class="card  card-tasks">
+        <div class="card-header ">
+          <h5 class="card-category">Total calls statistics</h5>
+          <h4 class="card-title">Total Calls</h4>
+        </div>
+        <hr>
+        <div class="card-body ">
+          <div class="text-center">
+            <h2 id="totalCalls">{{ totalCalls }}</h2>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh spin"></i> Updated Real time
+          </div>
+        </div>
+      </div>
+    </div>
+  <!--Abandoned Calls by Queue and Period column chart-->
+    <div class="col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h5 class="card-category">Abandoned Calls Statistics</h5>
+          <h4 class="card-title">Abandoned Calls by Queue and Period</h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="abandonedCalls"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <hr>
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh spin"></i> Updated Real time
+          </div>
+        </div>
+      </div>
+    </div>
+          
+        </div>
+        <div class="row">
+    <!--Average call Handle Times by Queue column chart-->
+    <div class="col-lg-4 col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h5 class="card-category">Average call Handled Statistics</h5>
+          <h4 class="card-title">Average call Handle Times by Queue</h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="averageCallHandleChart"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+         <hr> 
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh spin"></i> Updated Real time
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Average call Wait Times by Queue and Period column chart-->
+    <div class="col-lg-4 col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h5 class="card-category">Average call Wait Statistics</h5>
+          <h4 class="card-title">Average call Wait Times by Queue and Period</h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="barChartSimpleGradientsNumbers"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <hr>
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh spin"></i> Updated Real time
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Repeat Call Rate column chart-->
+<div class="col-lg-4 col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h5 class="card-category">Repeat Call Rate Statistics</h5>
+          <h4 class="card-title">Repeat Call Rate</h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="repeatCallChart"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <hr>
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh spin"></i> Updated Real time
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      </div>
+
+{% endblock content %}

@@ -1,0 +1,117 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+<!-- End Navbar -->
+<div class="panel-header panel-header-sm">
+</div>
+<div class="content">
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card  card-tasks">
+        <div class="card-header ">
+          <h5 class="card-category">Summary</h5>
+          <h4 class="card-title">Number of Calls</h4>
+        </div>
+        <hr>
+        <div class="card-body ">
+          <div class="text-center">
+            <h2>{{numberOfCalls}}</h2>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh spin"></i> Updated Real time
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card  card-tasks">
+        <div class="card-header ">
+          <h5 class="card-category">Summary</h5>
+          <h4 class="card-title">Number of Retail Customers</h4>
+        </div>
+        <hr>
+        <div class="card-body ">
+          <div class="text-center">
+            <h2>{{ numberOfRetailCustomers }}</h2>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh"></i> Updated 3 minutes ago
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="row">
+    <div class="col-md-6">
+      <div class="card  card-tasks">
+        <div class="card-header ">
+          <h5 class="card-category">Summary</h5>
+          <h4 class="card-title">Active Customers</h4>
+        </div>
+        <hr>
+        <div class="card-body ">
+          <div class="text-center">
+            <h2>{{ activeCustomers }}</h2>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh"></i> Updated 3 minutes ago
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card  card-tasks">
+        <div class="card-header ">
+          <h5 class="card-category">Summary</h5>
+          <h4 class="card-title">Inactive Customers</h4>
+        </div>
+        <hr>
+        <div class="card-body ">
+          <div class="text-center">
+            <h2>{{ inactiveCustomers }}</h2>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh"></i> Updated 3 minutes ago
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-11">
+      <div class="col-lg-12 col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h5 class="card-category">Summary</h5>
+          <h4 class="card-title">Customers on each plan</h4>
+        </div>
+        <div class="card-body">
+          <div class="chart-area">
+            <canvas id="customerOnEachPlanChart"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh spin"></i> Updated Real time
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}

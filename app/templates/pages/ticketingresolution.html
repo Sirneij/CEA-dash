@@ -1,0 +1,96 @@
+{% extends "layouts/default.html" %}
+{% block content %}
+	<!-- End Navbar -->
+<div class="panel-header">
+</div>
+<div class="content">
+	<div class="row">
+					<!--Average Ticket Handle Time By Queue and Period column chart-->
+		<div class="col-md-6">
+			<div class="card card-chart">
+				<div class="card-header">
+					<h5 class="card-category">Average Ticket Handle Statistics</h5>
+					<h4 class="card-title">Average Ticket Handle Time By Queue and Period</h4>
+				</div>
+				<div class="card-body">
+					<div class="chart-area">
+						<canvas id="averageTicketHandleChart"></canvas>
+					</div>
+				</div>
+				<div class="card-footer">
+					<hr>
+					<div class="stats">
+						<i class="now-ui-icons loader_refresh"></i> Updated Real time
+					</div>
+				</div>
+			</div>
+		</div>
+					
+	<!--SLA Violation Rate by Queue and Period  column chart-->
+		<div class="col-md-6">
+			<div class="card card-chart">
+				<div class="card-header">
+					<h5 class="card-category">SLA Violation Rate Statistics</h5>
+					<h4 class="card-title">SLA Violation Rate by Queue and Period </h4>
+				</div>
+				<div class="card-body">
+					<div class="chart-area">
+						<canvas id="slaViolationRatehart"></canvas>
+					</div>
+				</div>
+				<div class="card-footer">
+					<hr>
+					<div class="stats">
+						<i class="now-ui-icons loader_refresh"></i> Updated Real time
+					</div>
+				</div>
+			</div>
+		</div>
+					
+				</div>
+				 <div class="row">
+					<!--First Call Resolution Rate piechart-->
+		<div class="col-md-6">
+			<div class="card card-chart">
+				<div class="card-header">
+					<h5 class="card-category">First Call Resolution Rate Statistics</h5>
+					<h4 class="card-title">First Call Resolution Rate</h4>
+				</div>
+				<div class="card-body">
+					<div class="chart-area">
+						<canvas id="firstCallResolutionRateChart"></canvas>
+					</div>
+				</div>
+				<div class="card-footer">
+					<hr>
+					<div class="stats">
+						<i class="now-ui-icons loader_refresh"></i> Updated Real time
+					</div>
+				</div>
+			</div>
+		</div>
+					
+	<!--Top 5 Complaint Drivers column chart-->
+		<div class="col-md-6">
+			<div class="card card-chart">
+				<div class="card-header">
+					<h5 class="card-category">Top 5 Complaint Drivers Statistics</h5>
+					<h4 class="card-title">Top 5 Complaint Drivers </h4>
+				</div>
+				<div class="card-body">
+					<div class="chart-area">
+						<canvas id="top5ComplaintDriversChart"></canvas>
+					</div>
+				</div>
+				<div class="card-footer">
+					<hr>
+					<div class="stats">
+						<i class="now-ui-icons loader_refresh"></i> Updated Real time
+					</div>
+				</div>
+			</div>
+		</div>
+					
+				</div>
+			</div>
+{% endblock content %}

@@ -33,7 +33,7 @@ def chart_data():
         while True:
             json_data = json.dumps(
                 {'time': datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'value': random.random() * 100})
-            yield f"data:{json_data}\n\n"
+            yield "data:{}\n\n".format(json_data)
             time.sleep(1)
 
     return Response(generate_random_data(), mimetype='text/event-stream')
